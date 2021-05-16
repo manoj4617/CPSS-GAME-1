@@ -21,11 +21,13 @@ var innerX = x - 45;
 var innerY = y - 45;
 var innerMostX = x - 35;
 var innerMostY = y - 35;
-var radius = 20;
+var radius = 15;
 var ballDX = 2;
 var ballDY = 2;
-var dx = 4;
-var dy = 4;
+var outerBoxPoints = 1;
+var innerBoxPoints = 2;
+var innerMostPoints = 3;
+var score = 0;
 
 const keyUpHandler = (e)=>{
     if(e.key == 'Right' || e.key == 'ArrowRight'){
@@ -90,13 +92,18 @@ const drawBall = ()=>{
     ctx.fill();
     ctx.closePath();
 }
-
+const drawScore = ()=>{
+    ctx.fillStyle = '#26648C';
+    ctx.font = "30px Quicksand";
+    ctx.fillText(`Score: ${score}`, canvas.width - 150,50,100);
+}
 const draw = () => {
     ctx.clearRect(0,0,canvas.width,canvas.height);
     drawOuterBox();
     drawInnerBox();
     drawInnerMostBox();
     drawBall();
+    drawScore();
 
     //moving the ball
     if(y + ballDY < radius + (outerBoxHeight/4)){
@@ -108,6 +115,23 @@ const draw = () => {
 
     if(x + ballDX > canvas.width - radius - (outerBoxWidth/4) || x + ballDX < radius + (outerBoxHeight/4)){
         ballDX = -ballDX;
+    }
+
+     //getting score
+     if(y + ballDY > innerMostY && y + ballDY < innerMostY + innerMostHeight && x + ballDX > innerMostX && x + ballDX < innerX + innerMostWidth ){
+        score += innerMostPoints;
+        ctx.fillStyle = 'green';
+        ctx.fill();
+    }
+    else if(y + ballDY > innerY && y + ballDY < innerY + innerBoxHeight && x + ballDX > innerX && x + ballDX < innerX + innerBoxWidth ){
+        score += innerBoxPoints;
+        ctx.fillStyle = 'blue';
+        ctx.fill();
+    }
+    else if(y + ballDY > outerY && y + ballDY < outerY + outerBoxHeight && x + ballDX > outerX && x + ballDX < outerX + outerBoxWidth ){
+        score += outerBoxPoints;
+        ctx.fillStyle = 'red';
+        ctx.fill();
     }
 
     //defining button actions
@@ -154,11 +178,18 @@ const draw = () => {
         }
     }
 
+
     x += ballDX;
     y += ballDY;
-
     requestAnimationFrame(draw);
 }
 
 draw();
 
+const end = ()=>{
+    alert("GAME OVER!");
+    drawScore();
+    document.location.reload();
+}
+
+setTimeout(end,30000)
