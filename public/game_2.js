@@ -15,8 +15,13 @@ var moveBoxOneY = rectOneY + 5;
 var moveBoxTowX = rectTwoX + 5;
 var moveBoxTowY = rectTwoY + 5;
 
-var dx = 1;
-var dy = 1;
+var toMoveBoxOneX = moveBoxOneX + 4;
+var toMoveBoxOneY = moveBoxOneY + 4;
+var toMoveBoxTwoX = moveBoxTowX + 4;
+var toMoveBoxTwoY = moveBoxTowY + 4;
+
+var dx = 2;
+var dy = 2;
 
 const drawRect = ()=>{
     ctx.beginPath();
@@ -40,10 +45,25 @@ const drawMoveBox = () => {
     ctx.stroke();
     ctx.closePath();
 }
+
+const drawMovingBox = ()=>{
+    ctx.beginPath();
+    ctx.rect(toMoveBoxOneX,toMoveBoxOneY,80,80);
+    ctx.fillStyle = 'blue';
+    ctx.fill();
+    ctx.closePath();
+
+    ctx.beginPath();
+    ctx.rect(toMoveBoxTwoX,toMoveBoxTwoY,80,80);
+    ctx.fillStyle = 'red';
+    ctx.fill();
+    ctx.closePath();
+}
 const draw = ()=>{
     ctx.clearRect(0,0,canvas.width,canvas.height);
     drawRect();
     drawMoveBox();
+    drawMovingBox();
 
     if(moveBoxOneY < rectOneY + 5 || moveBoxOneY  >= rectOneY + rectOneWidth - 95){
         dy = -dy;
