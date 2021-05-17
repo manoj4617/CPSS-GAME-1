@@ -45,12 +45,15 @@ const draw = ()=>{
     drawRect();
     drawMoveBox();
 
-    if(moveBoxOneY < rectOneY + 5 || moveBoxOneY  >= rectOneWidth - 5){
-        console.log(moveBoxOneY);
+    if(moveBoxOneY < rectOneY + 5 || moveBoxOneY  >= rectOneY + rectOneWidth - 95){
         dy = -dy;
     }
     moveBoxOneY += dy;
 
+    if(moveBoxTowX < rectTwoX + 5 || moveBoxTowX >= rectTwoX + rectTwoWidth - 95){
+        dx = -dx;
+    }
+    moveBoxTowX += dx;
     requestAnimationFrame(draw);
 }
 
