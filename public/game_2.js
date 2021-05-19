@@ -20,8 +20,45 @@ var toMoveBoxOneY = moveBoxOneY + 4;
 var toMoveBoxTwoX = moveBoxTowX + 4;
 var toMoveBoxTwoY = moveBoxTowY + 4;
 
-var dx = 2;
-var dy = 2;
+var dx = 3;
+var dy = 3;
+
+var upPressed = false;
+var downPressed = false;
+var leftPressed = false;
+var rightPressed = false;
+
+const keyUpHandler = (e)=>{
+    if(e.key == 'd'){
+        rightPressed = false;
+    }
+    if(e.key == 'a'){
+        leftPressed = false;
+    }
+    if(e.key == 'Up' || e.key == 'ArrowUp'){
+        upPressed = false;
+    }
+    if(e.key == 'Down' || e.key == 'ArrowDown'){
+        downPressed = false;
+    }
+}
+const keyDownHandler = (e)=>{
+    if(e.key == 'd'){
+        rightPressed = true;
+    }
+    if(e.key == 'a'){
+        leftPressed = true;
+    }
+    if(e.key == 'Up' || e.key == 'ArrowUp'){
+        upPressed = true;
+    }
+    if(e.key == 'Down' || e.key == 'ArrowDown'){
+        downPressed = true;
+    }
+}
+
+document.addEventListener('keydown',keyDownHandler,false);
+document.addEventListener('keyup',keyUpHandler,false);
 
 const drawRect = ()=>{
     ctx.beginPath();
@@ -74,6 +111,32 @@ const draw = ()=>{
         dx = -dx;
     }
     moveBoxTowX += dx;
+
+    //KEY HANDLERS
+    if(rightPressed){
+        toMoveBoxTwoX += 3;
+        if(toMoveBoxTwoX + 80 > rectTwoX + rectTwoWidth){
+            toMoveBoxTwoX = rectTwoX + rectTwoWidth - 80;
+        }
+    }
+    if(leftPressed){
+        toMoveBoxTwoX -= 3;
+        if(toMoveBoxTwoX < rectTwoX){
+            toMoveBoxTwoX = rectTwoX;
+        }
+    }
+    if(upPressed){
+        toMoveBoxOneY -= 3;
+        if(toMoveBoxOneY < rectOneY){
+            toMoveBoxOneY = rectOneY;
+        }
+    }
+    if(downPressed){
+        toMoveBoxOneY += 3;
+        if(toMoveBoxOneY + 80 > rectOneY + rectOneWidth){
+            toMoveBoxOneY = rectOneY + rectOneWidth - 80;
+        }
+    }
     requestAnimationFrame(draw);
 }
 

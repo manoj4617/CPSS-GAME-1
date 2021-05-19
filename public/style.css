@@ -24,3 +24,41 @@ canvas{
     margin: 0.5% auto;
     text-align: center;
 }
+.game-select{
+    margin: 5% auto;
+    width:50%;
+    height: max-content;
+    padding:15px;
+    text-align: center ;
+}
+
+ul li{
+    list-style-type: none;
+    padding:10px;
+    margin:10px;
+}
+.game-select ul li a{
+    border: none;
+    border-radius: 10px;
+    padding:10px;
+    background:transparent;
+    font-size: 40px;
+    text-decoration: none;
+    color:#F9F106;
+    background-color: #DC06F9;
+}
+
+.goBack{
+    margin:0;
+}
+.goBack a{
+    font-size:30px;
+    color:#E40488;
+    margin-left: 100px;
+    text-decoration: none;
+}
+
+.goBack a:hover{
+    color:#FC6601;
+    transition: 300ms ease-in;
+}

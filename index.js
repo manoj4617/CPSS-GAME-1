@@ -6,6 +6,10 @@ app.use(express.static('public'));
 app.use(express.json());
 
 app.get('/',(req,res)=>{
+    res.render('main.ejs');
+})
+
+app.get('/game1',(req,res)=>{
     res.render('game_1.ejs');
 })
 
