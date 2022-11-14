@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+const port = process.env.PORT || 3000
+
 app.set('view engine','ejs');
 app.use(express.static('public'));
 app.use(express.json());
@@ -16,7 +18,11 @@ app.get('/game1',(req,res)=>{
 app.get('/game2',(req,res)=>{
     res.render('game_2.ejs');
 })
-app.listen(3030,(res,err)=>{
+
+app.get('/gameOfLife',(req,res)=>{
+    res.render('gameOfLife.ejs');
+})
+app.listen(port,(res,err)=>{
     if(err) console.log(err)
-    else console.log("listening on localhost:3030")
+    else console.log(`listening on localhost:${port}`)
 })
