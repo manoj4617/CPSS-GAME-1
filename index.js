@@ -19,9 +19,7 @@ app.get('/game2',(req,res)=>{
     res.render('game_2.ejs');
 })
 
-app.get('/gameOfLife',(req,res)=>{
-    res.render('gameOfLife.ejs');
-})
+
 app.listen(port,(res,err)=>{
     if(err) console.log(err)
     else console.log(`listening on localhost:${port}`)
